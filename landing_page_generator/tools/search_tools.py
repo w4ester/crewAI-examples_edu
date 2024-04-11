@@ -16,7 +16,7 @@ class SearchTools():
         'X-API-KEY': os.environ['SERPER_API_KEY'],
         'content-type': 'application/json'
     }
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload, timeout=60)
     results = response.json()['organic']
     string = []
     for result in results:
