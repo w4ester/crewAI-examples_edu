@@ -1,7 +1,5 @@
 import os
 
-import requests
-
 from langchain.tools import tool
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
@@ -9,6 +7,7 @@ from langchain_community.vectorstores import FAISS
 
 from sec_api import QueryApi
 from unstructured.partition.html import partition_html
+from security import safe_requests
 
 class SECTools():
   @tool("Search 10-Q form")
@@ -108,5 +107,5 @@ class SECTools():
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
     }
 
-    response = requests.get(url, headers=headers)
+    response = safe_requests.get(url, headers=headers)
     return response.text
